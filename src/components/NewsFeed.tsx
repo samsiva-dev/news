@@ -37,13 +37,23 @@ export function NewsFeed({ topicId }: Props) {
     <div>
       {/* Status bar */}
       <div className="flex items-center justify-between mb-5 text-sm text-gray-500 dark:text-gray-400">
-        <span>
-          {loading
-            ? 'Fetching latest news…'
-            : error
-            ? 'Could not load news'
-            : `${articles.length} articles${lastUpdated ? ` · updated ${formatTime(lastUpdated)}` : ''}`}
-        </span>
+        <div className="flex items-center gap-2">
+          <span>
+            {loading
+              ? 'Fetching latest news…'
+              : error
+              ? 'Could not load news'
+              : `${articles.length} articles${lastUpdated ? ` · updated ${formatTime(lastUpdated)}` : ''}`}
+          </span>
+          {topic && (
+            <span
+              title={topic.region === 'IN' ? 'India' : 'Global'}
+              className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300"
+            >
+              {topic.region === 'IN' ? '🇮🇳 India' : '🌐 Global'}
+            </span>
+          )}
+        </div>
         <button
           onClick={refresh}
           disabled={loading}
