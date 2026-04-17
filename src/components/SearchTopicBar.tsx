@@ -24,6 +24,7 @@ export function SearchTopicBar({ onAdd, onSearch }: Props) {
       query: trimmed,
       color: 'from-cyan-500 to-cyan-700',
       icon: '🔍',
+      region: 'GLOBAL',
     });
     onSearch(id);
     setValue('');
