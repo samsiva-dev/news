@@ -11,18 +11,11 @@ interface Props {
 
 function SkeletonCard() {
   return (
-    <div className="rounded-2xl overflow-hidden bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 animate-pulse">
-      <div className="h-44 bg-gray-200 dark:bg-gray-700" />
-      <div className="p-4 flex flex-col gap-3">
-        <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/3" />
-        <div className="space-y-2">
-          <div className="h-3.5 bg-gray-200 dark:bg-gray-700 rounded w-full" />
-          <div className="h-3.5 bg-gray-200 dark:bg-gray-700 rounded w-4/5" />
-          <div className="h-3.5 bg-gray-200 dark:bg-gray-700 rounded w-3/5" />
-        </div>
-        <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-2/3" />
-        <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mt-2" />
-      </div>
+    <div className="rounded-xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 animate-pulse px-5 py-4 flex flex-col gap-2">
+      <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/4" />
+      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full" />
+      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4" />
+      <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-2/3" />
     </div>
   );
 }
@@ -77,7 +70,7 @@ export function NewsFeed({ topicId }: Props) {
 
       {/* Loading skeletons */}
       {loading && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="flex flex-col gap-3">
           {Array.from({ length: 8 }).map((_, i) => (
             <SkeletonCard key={i} />
           ))}
@@ -86,7 +79,7 @@ export function NewsFeed({ topicId }: Props) {
 
       {/* Articles grid */}
       {!loading && !error && articles.length > 0 && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="flex flex-col gap-3">
           {articles.map(article => (
             <NewsCard
               key={article.id}
