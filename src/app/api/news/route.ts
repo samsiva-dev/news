@@ -5,7 +5,10 @@ import { TOPICS } from '@/lib/topics';
 function buildRssUrl(topicId: string): string {
   const topic = TOPICS.find(t => t.id === topicId);
   const query = topic ? topic.query : topicId;
-  return `https://news.google.com/rss/search?q=${encodeURIComponent(query)}&hl=en-US&gl=US&ceid=US:en`;
+  const locale = topic?.region === 'IN'
+    ? 'hl=en-IN&gl=IN&ceid=IN:en'
+    : 'hl=en-US&gl=US&ceid=US:en';
+  return `https://news.google.com/rss/search?q=${encodeURIComponent(query)}&${locale}`;
 }
 
 export async function GET(request: NextRequest) {

@@ -20,4 +20,5 @@ export interface Topic {
   query: string;
   color: string;
   icon: string;
+  region: 'IN' | 'GLOBAL';
 }

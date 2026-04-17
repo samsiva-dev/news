@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { ExternalLink, Clock } from 'lucide-react';
 import type { Article } from '@/lib/types';
 
@@ -24,6 +25,23 @@ function relativeTime(dateStr: string): string {
   }
 }
 
+function FaviconImg({ sourceUrl, source }: { sourceUrl: string; source: string }) {
+  const [err, setErr] = useState(false);
+  if (!sourceUrl || err) return null;
+  let hostname = '';
+  try { hostname = new URL(sourceUrl).hostname; } catch { return null; }
+  return (
+    <img
+      src={`https://www.google.com/s2/favicons?domain=${hostname}&sz=32`}
+      alt={source}
+      width={14}
+      height={14}
+      className="rounded-sm flex-shrink-0"
+      onError={() => setErr(true)}
+    />
+  );
+}
+
 export function NewsCard({ article }: Props) {
   return (
     <a
@@ -34,6 +52,7 @@ export function NewsCard({ article }: Props) {
     >
       {/* Source + time */}
       <div className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400">
+        <FaviconImg sourceUrl={article.sourceUrl} source={article.source} />
         <span className="font-semibold text-gray-700 dark:text-gray-300 truncate">{article.source}</span>
         {article.publishedAt && (
           <>
